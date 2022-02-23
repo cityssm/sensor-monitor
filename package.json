@@ -1,0 +1,67 @@
+{
+  "name": "sensor-monitor",
+  "version": "1.0.0",
+  "description": "A dashboard for server room sensors.",
+  "type": "module",
+  "exports": "./app.js",
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "dev": "cross-env NODE_ENV=dev DEBUG=sensor-monitor:* nodemon ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cityssm/sensor-monitor.git"
+  },
+  "author": "The Corporation of the City of Sault Ste. Marie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cityssm/sensor-monitor/issues"
+  },
+  "homepage": "https://github.com/cityssm/sensor-monitor#readme",
+  "dependencies": {
+    "@cityssm/bulma-a11y": "^0.4.0",
+    "@cityssm/bulma-js": "^0.3.2",
+    "@cityssm/bulma-webapp-js": "^1.5.0",
+    "@cityssm/expressjs-server-js": "^2.3.1",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "better-sqlite3": "^7.5.0",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "debug": "^4.3.3",
+    "echarts": "^5.3.0",
+    "ejs": "^3.1.6",
+    "exit-hook": "^3.0.0",
+    "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "node-fetch": "^3.2.0",
+    "set-interval-async": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.4.2",
+    "@types/compression": "^1.7.2",
+    "@types/debug": "^4.1.7",
+    "@types/ejs": "^3.1.0",
+    "@types/express": "^4.17.13",
+    "@types/express-serve-static-core": "^4.17.28",
+    "@types/gulp": "^4.0.9",
+    "@types/gulp-changed": "^0.0.35",
+    "@types/gulp-minify": "^3.1.1",
+    "@types/http-errors": "^1.8.2",
+    "@types/set-interval-async": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-unicorn": "^40.1.0",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.3",
+    "gulp-minify": "^3.1.0",
+    "nodemon": "^2.0.15"
+  }
+}
