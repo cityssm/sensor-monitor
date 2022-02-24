@@ -1,10 +1,11 @@
 export interface Config {
     application: {
-        applicationTitle: string;
+        applicationName: string;
         httpPort: number;
     };
     settings?: {
         pollingMillis?: number;
+        viewDays?: number;
         purgeDays?: number;
     };
     configs: SensorConfigs[];

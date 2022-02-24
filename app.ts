@@ -61,14 +61,17 @@ app.use(express.static(path.join("public")));
 app.use("/lib/bulma-a11y",
   express.static(path.join("node_modules", "@cityssm", "bulma-a11y")));
 
-app.use("/lib/fa5",
-  express.static(path.join("node_modules", "@fortawesome", "fontawesome-free")));
+app.use("/lib/bulma-js",
+  express.static(path.join("node_modules", "@cityssm", "bulma-js", "dist")));
 
 app.use("/lib/bulma-webapp-js",
   express.static(path.join("node_modules", "@cityssm", "bulma-webapp-js", "dist")));
 
-app.use("/lib/bulma-js",
-  express.static(path.join("node_modules", "@cityssm", "bulma-js", "dist")));
+app.use("/lib/echarts",
+  express.static(path.join("node_modules", "echarts", "dist")));
+
+app.use("/lib/fa5",
+  express.static(path.join("node_modules", "@fortawesome", "fontawesome-free")));
 
 
 /*
@@ -90,7 +93,7 @@ app.use((_request, response, next) => {
 });
 
 
-app.get("/", routerDashboard);
+app.use("/", routerDashboard);
 
 
 // Catch 404 and forward to error handler

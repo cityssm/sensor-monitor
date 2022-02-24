@@ -25,9 +25,10 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(path.join("public")));
 app.use("/lib/bulma-a11y", express.static(path.join("node_modules", "@cityssm", "bulma-a11y")));
-app.use("/lib/fa5", express.static(path.join("node_modules", "@fortawesome", "fontawesome-free")));
-app.use("/lib/bulma-webapp-js", express.static(path.join("node_modules", "@cityssm", "bulma-webapp-js", "dist")));
 app.use("/lib/bulma-js", express.static(path.join("node_modules", "@cityssm", "bulma-js", "dist")));
+app.use("/lib/bulma-webapp-js", express.static(path.join("node_modules", "@cityssm", "bulma-webapp-js", "dist")));
+app.use("/lib/echarts", express.static(path.join("node_modules", "echarts", "dist")));
+app.use("/lib/fa5", express.static(path.join("node_modules", "@fortawesome", "fontawesome-free")));
 app.use((_request, response, next) => {
     response.locals.buildNumber = process.env.npm_package_version;
     response.locals.configFunctions = configFunctions;
@@ -36,7 +37,7 @@ app.use((_request, response, next) => {
     response.locals.htmlFns = htmlFns;
     next();
 });
-app.get("/", routerDashboard);
+app.use("/", routerDashboard);
 app.use((_request, _response, next) => {
     next(createError(404));
 });

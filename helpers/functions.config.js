@@ -3,6 +3,7 @@ const configFallbackValues = new Map();
 configFallbackValues.set("application.applicationName", "Sensor Monitor");
 configFallbackValues.set("application.httpPort", 7676);
 configFallbackValues.set("settings.pollingMillis", 60000);
+configFallbackValues.set("settings.viewDays", 5);
 configFallbackValues.set("settings.purgeDays", 60);
 configFallbackValues.set("configs", []);
 export function getProperty(propertyName) {
