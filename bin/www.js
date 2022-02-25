@@ -43,4 +43,4 @@ if (httpPort) {
     debug("HTTP listening on " + httpPort.toString());
 }
 fork("./tasks/configPoller");
-fork("./tasks/databaseCleaner");
+fork("./tasks/databaseCleanup");
