@@ -19,6 +19,7 @@ configFallbackValues.set("reverseProxy.urlPrefix", "");
 
 configFallbackValues.set("settings.pollingMillis", 60_000);
 configFallbackValues.set("settings.viewDays", 5);
+configFallbackValues.set("settings.historicalBucketMinutes", 5);
 configFallbackValues.set("settings.purgeDays", 60);
 
 configFallbackValues.set("configs", []);
@@ -38,6 +39,7 @@ export function getProperty(propertyName: "reverseProxy.urlPrefix"): string;
 
 export function getProperty(propertyName: "settings.pollingMillis"): number;
 export function getProperty(propertyName: "settings.viewDays"): number;
+export function getProperty(propertyName: "settings.historicalBucketMinutes"): number;
 export function getProperty(propertyName: "settings.purgeDays"): number;
 
 export function getProperty(propertyName: "configs"): configTypes.SensorConfigs[];

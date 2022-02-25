@@ -7,6 +7,7 @@ configFallbackValues.set("reverseProxy.disableEtag", false);
 configFallbackValues.set("reverseProxy.urlPrefix", "");
 configFallbackValues.set("settings.pollingMillis", 60000);
 configFallbackValues.set("settings.viewDays", 5);
+configFallbackValues.set("settings.historicalBucketMinutes", 5);
 configFallbackValues.set("settings.purgeDays", 60);
 configFallbackValues.set("configs", []);
 export function getProperty(propertyName) {

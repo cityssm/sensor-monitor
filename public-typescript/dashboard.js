@@ -69,16 +69,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
     const historicalStatusLogs = exports.historicalStatusLogs;
     const initializeSensor = (configKey, sensorKey, sensorElement) => {
         const statusLogs = historicalStatusLogs[configKey][sensorKey];
-        const currentStatusLog = {
-            configKey,
-            sensorKey,
-            statusTimeMillis: statusLogs[statusLogs.length - 1].statusTimeMillis,
-            isError: statusLogs[statusLogs.length - 1].isError,
-            sensorValue: statusLogs[statusLogs.length - 1].sensorValue,
-            sensorText: statusLogs[statusLogs.length - 1].sensorText,
-            sensorValueMin: statusLogs[statusLogs.length - 1].sensorValue,
-            sensorValueMax: statusLogs[statusLogs.length - 1].sensorValue
-        };
         const chartElement = sensorElement.querySelector(".chart");
         const chart = echarts.init(chartElement);
         const chartOptions = {
@@ -101,13 +91,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
                 }]
         };
         for (const statusLog of statusLogs) {
-            currentStatusLog.sensorValueMin = Math.min(currentStatusLog.sensorValueMin, statusLog.sensorValue);
-            currentStatusLog.sensorValueMax = Math.max(currentStatusLog.sensorValueMax, statusLog.sensorValue);
             chartOptions.series[0].data.push([new Date(statusLog.statusTimeMillis), statusLog.sensorValue]);
         }
         chart.setOption(chartOptions);
         charts[configKey][sensorKey] = chart;
-        renderCurrentStatusLog(currentStatusLog, sensorElement);
     };
     const initialize = () => {
         for (const [configKey, config] of Object.entries(historicalStatusLogs)) {
@@ -123,6 +110,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
                 }
                 initializeSensor(configKey, sensorKey, sensorElement);
             }
+        }
+        const currentStatusLogs = exports.currentStatusLogs;
+        for (const currentStatusLog of currentStatusLogs) {
+            renderCurrentStatusLog(currentStatusLog);
         }
     };
     initialize();

@@ -1,7 +1,9 @@
 import type { RequestHandler } from "express";
 
 import * as configFunctions from "../helpers/functions.config.js";
+
 import { getStatusLogs } from "../helpers/statusDB/getStatusLogs.js";
+import { getCurrentStatusLogs } from "../helpers/statusDB/getCurrentStatusLogs.js";
 
 import type { HistoricalStatusLogs } from "../types/recordTypes";
 
@@ -19,8 +21,11 @@ export const handler: RequestHandler = (_request, response) => {
     }
   }
 
+  const currentStatusLogs = getCurrentStatusLogs();
+
   return response.render("dashboard", {
-    historicalStatusLogs
+    historicalStatusLogs,
+    currentStatusLogs
   });
 };
 

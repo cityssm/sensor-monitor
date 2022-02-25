@@ -11,6 +11,7 @@ export interface Config {
   settings?: {
     pollingMillis?: number;
     viewDays?: number;
+    historicalBucketMinutes?: number;
     purgeDays?: number;
   };
   configs: SensorConfigs[];

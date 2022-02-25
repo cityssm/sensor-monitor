@@ -53,6 +53,7 @@
   <script>
     window.exports = window.exports || {};
     exports.historicalStatusLogs = <%- JSON.stringify(historicalStatusLogs) %>;
+    exports.currentStatusLogs = <%- JSON.stringify(currentStatusLogs) %>;
     exports.urlPrefix = "<%= urlPrefix %>";
   </script>
   <script src="<%= urlPrefix %>/lib/echarts/echarts.min.js"></script>

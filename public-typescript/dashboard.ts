@@ -126,17 +126,6 @@ type ChartData = [
 
     const statusLogs = historicalStatusLogs[configKey][sensorKey];
 
-    const currentStatusLog: recordTypes.CurrentStatusLog = {
-      configKey,
-      sensorKey,
-      statusTimeMillis: statusLogs[statusLogs.length - 1].statusTimeMillis,
-      isError: statusLogs[statusLogs.length - 1].isError,
-      sensorValue: statusLogs[statusLogs.length - 1].sensorValue,
-      sensorText: statusLogs[statusLogs.length - 1].sensorText,
-      sensorValueMin: statusLogs[statusLogs.length - 1].sensorValue,
-      sensorValueMax: statusLogs[statusLogs.length - 1].sensorValue
-    };
-
     // Setup chart
 
     const chartElement = sensorElement.querySelector(".chart") as HTMLElement;
@@ -164,9 +153,6 @@ type ChartData = [
 
     for (const statusLog of statusLogs) {
 
-      currentStatusLog.sensorValueMin = Math.min(currentStatusLog.sensorValueMin, statusLog.sensorValue);
-      currentStatusLog.sensorValueMax = Math.max(currentStatusLog.sensorValueMax, statusLog.sensorValue);
-
       chartOptions.series[0].data.push(
         [new Date(statusLog.statusTimeMillis), statusLog.sensorValue]
       );
@@ -175,8 +161,6 @@ type ChartData = [
     chart.setOption(chartOptions);
 
     charts[configKey][sensorKey] = chart;
-
-    renderCurrentStatusLog(currentStatusLog, sensorElement);
   };
 
   const initialize = () => {
@@ -201,6 +185,12 @@ type ChartData = [
 
         initializeSensor(configKey, sensorKey, sensorElement);
       }
+    }
+
+    const currentStatusLogs: recordTypes.CurrentStatusLog[] = exports.currentStatusLogs;
+
+    for (const currentStatusLog of currentStatusLogs) {
+      renderCurrentStatusLog(currentStatusLog);
     }
   };
 

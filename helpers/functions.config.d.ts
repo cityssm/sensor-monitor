@@ -6,5 +6,6 @@ export declare function getProperty(propertyName: "reverseProxy.disableEtag"): b
 export declare function getProperty(propertyName: "reverseProxy.urlPrefix"): string;
 export declare function getProperty(propertyName: "settings.pollingMillis"): number;
 export declare function getProperty(propertyName: "settings.viewDays"): number;
+export declare function getProperty(propertyName: "settings.historicalBucketMinutes"): number;
 export declare function getProperty(propertyName: "settings.purgeDays"): number;
 export declare function getProperty(propertyName: "configs"): configTypes.SensorConfigs[];
