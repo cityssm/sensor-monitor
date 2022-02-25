@@ -9,13 +9,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="icon" href="/images/favicon.svg" />
-  <link rel="stylesheet" href="/lib/bulma-a11y/bulma-a11y.min.css" />
+  <link rel="icon" href="<%= urlPrefix %>/images/favicon.svg" />
+  <link rel="stylesheet" href="<%= urlPrefix %>/lib/bulma-a11y/bulma-a11y.min.css" />
 </head>
 
 <body>
   <main class="container" data-polling-millis="<%= configFunctions.getProperty("settings.pollingMillis") %>">
-    <h1 class="title is-1 has-text-centered"><%= configFunctions.getProperty("application.applicationName") %></h1>
+    <h1 class="title is-1 mt-4 has-text-centered"><%= configFunctions.getProperty("application.applicationName") %></h1>
 
     <% for (const config of configFunctions.getProperty("configs")) { %>
       <section class="section" data-config-key="<%= config.configKey %>">
@@ -35,6 +35,7 @@
                   <%= sensor.sensorValue.unit %>
                 </p>
                 <p class="is-size-7 has-text-grey">
+                  Updated: <span data-field="statusTime"></span><br />
                   Max: <span data-field="sensorValueMax"></span> <%= sensor.sensorValue.unit %><br />
                   Min: <span data-field="sensorValueMin"></span> <%= sensor.sensorValue.unit %>
                 </p>
@@ -52,11 +53,12 @@
   <script>
     window.exports = window.exports || {};
     exports.historicalStatusLogs = <%- JSON.stringify(historicalStatusLogs) %>;
+    exports.urlPrefix = "<%= urlPrefix %>";
   </script>
-  <script src="/lib/echarts/echarts.min.js"></script>
-  <script src="/lib/bulma-js/bulma-js.js"></script>
-  <script src="/lib/bulma-webapp-js/cityssm.min.js"></script>
-  <script src="/javascripts/dashboard.min.js"></script>
+  <script src="<%= urlPrefix %>/lib/echarts/echarts.min.js"></script>
+  <script src="<%= urlPrefix %>/lib/bulma-js/bulma-js.js"></script>
+  <script src="<%= urlPrefix %>/lib/bulma-webapp-js/cityssm.min.js"></script>
+  <script src="<%= urlPrefix %>/javascripts/dashboard.min.js"></script>
 </body>
 
 </html>

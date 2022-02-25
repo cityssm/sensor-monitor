@@ -1,8 +1,8 @@
 import fetch from "node-fetch";
-import { addStatusLog } from "../helpers/statusDB/addStatusLog.js";
+import { addStatusLog } from "../../helpers/statusDB/addStatusLog.js";
 
-import type { StatusLog } from "../types/recordTypes";
-import type { SensorConfig_AVTECH } from "../types/configTypes";
+import type { StatusLog } from "../../types/recordTypes";
+import type { SensorConfig_AVTECH } from "../../types/configTypes";
 
 
 export const getStatuses = async (config: SensorConfig_AVTECH) => {

@@ -13,6 +13,10 @@ const configFallbackValues = new Map<string, unknown>();
 configFallbackValues.set("application.applicationName", "Sensor Monitor");
 configFallbackValues.set("application.httpPort", 7676);
 
+configFallbackValues.set("reverseProxy.disableCompression", false);
+configFallbackValues.set("reverseProxy.disableEtag", false);
+configFallbackValues.set("reverseProxy.urlPrefix", "");
+
 configFallbackValues.set("settings.pollingMillis", 60_000);
 configFallbackValues.set("settings.viewDays", 5);
 configFallbackValues.set("settings.purgeDays", 60);
@@ -27,9 +31,15 @@ configFallbackValues.set("configs", []);
 
 export function getProperty(propertyName: "application.applicationName"): string;
 export function getProperty(propertyName: "application.httpPort"): number;
+
+export function getProperty(propertyName: "reverseProxy.disableCompression"): boolean;
+export function getProperty(propertyName: "reverseProxy.disableEtag"): boolean;
+export function getProperty(propertyName: "reverseProxy.urlPrefix"): string;
+
 export function getProperty(propertyName: "settings.pollingMillis"): number;
 export function getProperty(propertyName: "settings.viewDays"): number;
 export function getProperty(propertyName: "settings.purgeDays"): number;
+
 export function getProperty(propertyName: "configs"): configTypes.SensorConfigs[];
 
 

@@ -1,4 +1,4 @@
-import { getStatuses as getStatuses_AVTECH } from "./configPoller_AVTECH.js";
+import { getStatuses as getStatuses_AVTECH } from "./configPoller/avtech.js";
 import * as configFunctions from "../helpers/functions.config.js";
 import { setIntervalAsync, clearIntervalAsync } from "set-interval-async/fixed/index.js";
 import exitHook from "exit-hook";

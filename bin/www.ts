@@ -81,4 +81,4 @@ if (httpPort) {
  */
 
 fork("./tasks/configPoller");
-//fork("./tasks/databaseCleaner");
+fork("./tasks/databaseCleaner");

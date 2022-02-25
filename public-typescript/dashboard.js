@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 (() => {
+    const urlPrefix = exports.urlPrefix;
     const charts = {};
     const clearTextColors = (element) => {
         element.classList.remove("has-text-danger", "has-text-warning", "has-text-success", "has-text-grey");
@@ -29,6 +30,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
         for (const element of sensorElement.querySelectorAll("[data-field='sensorValue']")) {
             element.textContent = currentStatusLog.sensorValue.toString();
         }
+        for (const element of sensorElement.querySelectorAll("[data-field='statusTime']")) {
+            element.textContent = new Date(currentStatusLog.statusTimeMillis).toLocaleString();
+        }
         for (const element of sensorElement.querySelectorAll("[data-field='sensorValueMin']")) {
             element.textContent = currentStatusLog.sensorValueMin.toString();
         }
@@ -56,7 +60,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
         }
     };
     const getCurrentStatusLogs = () => {
-        cityssm.postJSON("/doGetCurrentStatusLogs", {}, (responseJSON) => {
+        cityssm.postJSON(urlPrefix + "/doGetCurrentStatusLogs", {}, (responseJSON) => {
             for (const currentStatusLog of responseJSON.currentStatusLogs) {
                 renderCurrentStatusLog(currentStatusLog);
             }

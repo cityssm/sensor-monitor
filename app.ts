@@ -31,13 +31,17 @@ initializeDatabase();
 
 export const app = express();
 
+if (!configFunctions.getProperty("reverseProxy.disableEtag")) {
+  app.set("etag", false);
+}
 
 // View engine setup
 app.set("views", path.join("views"));
 app.set("view engine", "ejs");
 
-
-app.use(compression());
+if (!configFunctions.getProperty("reverseProxy.disableCompression")) {
+  app.use(compression());
+}
 
 app.use((request, _response, next) => {
   debug(`${request.method} ${request.url}`);
@@ -56,21 +60,24 @@ app.use(express.urlencoded({
  */
 
 
-app.use(express.static(path.join("public")));
+ const urlPrefix = configFunctions.getProperty("reverseProxy.urlPrefix");
 
-app.use("/lib/bulma-a11y",
+
+app.use(urlPrefix, express.static(path.join("public")));
+
+app.use(urlPrefix + "/lib/bulma-a11y",
   express.static(path.join("node_modules", "@cityssm", "bulma-a11y")));
 
-app.use("/lib/bulma-js",
+app.use(urlPrefix + "/lib/bulma-js",
   express.static(path.join("node_modules", "@cityssm", "bulma-js", "dist")));
 
-app.use("/lib/bulma-webapp-js",
+app.use(urlPrefix + "/lib/bulma-webapp-js",
   express.static(path.join("node_modules", "@cityssm", "bulma-webapp-js", "dist")));
 
-app.use("/lib/echarts",
+app.use(urlPrefix + "/lib/echarts",
   express.static(path.join("node_modules", "echarts", "dist")));
 
-app.use("/lib/fa5",
+app.use(urlPrefix + "/lib/fa5",
   express.static(path.join("node_modules", "@fortawesome", "fontawesome-free")));
 
 
@@ -88,12 +95,13 @@ app.use((_request, response, next) => {
   response.locals.dateTimeFns = dateTimeFns;
   response.locals.stringFns = stringFns;
   response.locals.htmlFns = htmlFns;
+  response.locals.urlPrefix = urlPrefix;
 
   next();
 });
 
 
-app.use("/", routerDashboard);
+app.use(urlPrefix + "/", routerDashboard);
 
 
 // Catch 404 and forward to error handler

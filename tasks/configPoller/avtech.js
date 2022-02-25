@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { addStatusLog } from "../helpers/statusDB/addStatusLog.js";
+import { addStatusLog } from "../../helpers/statusDB/addStatusLog.js";
 export const getStatuses = async (config) => {
     const response = await fetch(config.statusURL);
     const statusTimeMillis = Date.now();

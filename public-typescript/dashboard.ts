@@ -26,6 +26,8 @@ type ChartData = [
 
 (() => {
 
+  const urlPrefix = exports.urlPrefix as string;
+
   const charts: Charts = {};
 
   const clearTextColors = (element: HTMLElement) => {
@@ -64,6 +66,10 @@ type ChartData = [
 
     for (const element of sensorElement.querySelectorAll("[data-field='sensorValue']")) {
       element.textContent = currentStatusLog.sensorValue.toString();
+    }
+
+    for (const element of sensorElement.querySelectorAll("[data-field='statusTime']")) {
+      element.textContent = new Date(currentStatusLog.statusTimeMillis).toLocaleString();
     }
 
     for (const element of sensorElement.querySelectorAll("[data-field='sensorValueMin']")) {
@@ -105,7 +111,7 @@ type ChartData = [
 
   const getCurrentStatusLogs = () => {
 
-    cityssm.postJSON("/doGetCurrentStatusLogs", {},
+    cityssm.postJSON(urlPrefix + "/doGetCurrentStatusLogs", {},
       (responseJSON: { currentStatusLogs: recordTypes.CurrentStatusLog[] }) => {
 
         for (const currentStatusLog of responseJSON.currentStatusLogs) {

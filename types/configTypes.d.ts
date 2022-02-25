@@ -3,6 +3,11 @@ export interface Config {
         applicationName: string;
         httpPort: number;
     };
+    reverseProxy?: {
+        disableCompression: boolean;
+        disableEtag: boolean;
+        urlPrefix: string;
+    };
     settings?: {
         pollingMillis?: number;
         viewDays?: number;
