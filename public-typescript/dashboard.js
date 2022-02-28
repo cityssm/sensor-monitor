@@ -43,15 +43,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
             element.textContent = currentStatusLog.sensorText;
         }
         if (updateChart) {
+            const chartElement = sensorElement.querySelector(".chart");
             const chart = charts[currentStatusLog.configKey][currentStatusLog.sensorKey];
             const data = chart.getOption().series[0].data;
             while (data.length > 10000) {
                 data.shift();
             }
-            data.push([
-                new Date(currentStatusLog.statusTimeMillis),
-                currentStatusLog.sensorValue
-            ]);
+            const dataPoint = {
+                value: [
+                    new Date(currentStatusLog.statusTimeMillis),
+                    currentStatusLog.sensorValue
+                ]
+            };
+            if ((chartElement.dataset.min && Number.parseFloat(chartElement.dataset.min) > currentStatusLog.sensorValue) ||
+                (chartElement.dataset.max && Number.parseFloat(chartElement.dataset.max) < currentStatusLog.sensorValue)) {
+                dataPoint.symbol = "circle";
+                dataPoint.symbolSize = 4;
+                dataPoint.itemStyle = {
+                    color: "red"
+                };
+            }
+            else {
+                dataPoint.symbolSize = 0;
+            }
+            data.push(dataPoint);
             chart.setOption({
                 series: {
                     data: data
@@ -78,20 +93,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
             xAxis: {
                 type: "time"
             },
-            yAxis: {
-                type: "value",
-                min: "dataMin",
-                max: "dataMax"
-            },
+            yAxis: [{
+                    type: "value",
+                    min: "dataMin",
+                    max: "dataMax"
+                }],
             series: [{
                     data: [],
                     type: "line",
-                    showSymbol: false,
                     smooth: true
                 }]
         };
         for (const statusLog of statusLogs) {
-            chartOptions.series[0].data.push([new Date(statusLog.statusTimeMillis), statusLog.sensorValue]);
+            const dataPoint = {
+                value: [new Date(statusLog.statusTimeMillis), statusLog.sensorValue]
+            };
+            if ((chartElement.dataset.min && Number.parseFloat(chartElement.dataset.min) > statusLog.sensorValue) ||
+                (chartElement.dataset.max && Number.parseFloat(chartElement.dataset.max) < statusLog.sensorValue)) {
+                dataPoint.symbol = "circle";
+                dataPoint.symbolSize = 4;
+                dataPoint.itemStyle = {
+                    color: "red"
+                };
+            }
+            else {
+                dataPoint.symbolSize = 0;
+            }
+            chartOptions.series[0].data.push(dataPoint);
         }
         chart.setOption(chartOptions);
         charts[configKey][sensorKey] = chart;
