@@ -37,7 +37,7 @@
     "exit-hook": "^3.0.0",
     "express": "^4.17.3",
     "http-errors": "^2.0.0",
-    "node-fetch": "^3.2.0",
+    "node-fetch": "^3.2.10",
     "set-interval-async": "^2.0.3"
   },
   "devDependencies": {
