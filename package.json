@@ -29,7 +29,7 @@
     "@cityssm/expressjs-server-js": "^2.3.1",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "better-sqlite3": "^7.5.0",
-    "compression": "^1.7.4",
+    "compression": "^1.8.1",
     "cross-env": "^7.0.3",
     "debug": "^4.3.3",
     "echarts": "^5.3.0",
